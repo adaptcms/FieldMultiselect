@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import get from 'lodash.get'
+import { get } from 'lodash'
 import Multiselect from '@/Adaptcms/Base/ui/components/Form/Multiselect'
 
 export default {
@@ -27,7 +27,6 @@ export default {
     'errors',
     'formMeta',
     'model',
-    'module',
     'action'
   ],
 

@@ -15,14 +15,15 @@
 </template>
 
 <script>
-import get from 'lodash.get'
+import { get } from 'lodash'
 
 export default {
   props: [
     'value',
     'field',
-    'module',
-    'errors'
+    'package',
+    'errors',
+    'fields'
   ],
 
   watch: {
