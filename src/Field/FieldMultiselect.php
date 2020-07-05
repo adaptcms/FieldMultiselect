@@ -7,6 +7,25 @@ use Adaptcms\Fields\FieldType;
 class FieldMultiselect extends FieldType
 {
   /**
+  * @var array
+  */
+  public $defaultSettings = [
+    'options' => [
+      'is_sortable'        => false,
+      'is_searchable'      => false,
+      'is_required_create' => false,
+      'is_required_edit'   => false
+    ],
+    'action_rules' => [
+      'index'  => false,
+      'create' => true,
+      'edit'   => true,
+      'show'   => true,
+      'search' => false
+    ]
+  ];
+
+  /**
   * Migration Command
   * When a package field is made from this field, you must supply a valid
   * migration string in string format.
@@ -44,5 +63,17 @@ class FieldMultiselect extends FieldType
   public function setValue($value)
   {
     return json_encode($value);
+  }
+
+  /**
+  * Create Field Rules
+  *
+  * @return array
+  */
+  public function createFieldRules()
+  {
+    return [
+      'meta.options' => 'required'
+    ];
   }
 }
