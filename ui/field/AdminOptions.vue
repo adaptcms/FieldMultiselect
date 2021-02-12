@@ -50,14 +50,14 @@ export default {
   computed: {
     hasError () {
       let key = 'meta.options'
-      let errors = get(this.$page, 'errors')
+      let errors = get(this.$page, 'props.errors')
 
       return (typeof errors[key] !== 'undefined')
     },
 
     errorsList () {
       let key = 'meta.options'
-      let errors = get(this.$page, 'errors')
+      let errors = get(this.$page, 'props.errors')
 
       return (typeof errors[key] !== 'undefined' ? errors[key] : [])
     }
