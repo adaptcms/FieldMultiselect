@@ -76,4 +76,16 @@ class FieldMultiselect extends FieldType
       'meta.options' => 'required'
     ];
   }
+
+  /**
+  * Update Field Rules
+  *
+  * @return array
+  */
+  public function updateFieldRules()
+  {
+    return [
+      'meta.options' => 'required'
+    ];
+  }
 }
