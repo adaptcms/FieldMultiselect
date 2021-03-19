@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { get } from 'lodash'
+import { get, isEmpty } from 'lodash'
 import Multiselect from '@/Adaptcms/Base/ui/components/Form/Multiselect'
 
 export default {
   props: [
-    'value',
+    'modelValue',
     'field',
     'errors',
     'formMeta',
@@ -30,20 +30,24 @@ export default {
     'action'
   ],
 
+  emits: [
+    'update:modelValue'
+  ],
+
   components: {
     Multiselect
   },
 
   watch: {
-    value (newVal, oldVal) {
-      if (newVal !== oldVal) {
+    modelValue (newVal, oldVal) {
+      if (!isEmpty(newVal) && newVal !== oldVal) {
         this.selected = newVal
       }
     },
 
     selected (newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.$emit('input', newVal)
+        this.$emit('update:modelValue', newVal)
       }
     }
   },
@@ -68,7 +72,7 @@ export default {
 
   mounted () {
     if (!this.selected) {
-      this.selected = JSON.parse(this.value)
+      this.selected = this.modelValue
     }
   }
 }

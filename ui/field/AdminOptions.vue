@@ -26,15 +26,19 @@ import { get } from 'lodash'
 
 export default {
   props: [
-    'value',
+    'modelValue',
     'field',
     'package',
     'errors',
     'fields'
   ],
 
+  emits: [
+    'update:modelValue'
+  ],
+
   watch: {
-    value (newVal, oldVal) {
+    modelValue (newVal, oldVal) {
       if ((newVal !== oldVal) && get(newVal, 'options', null)) {
         this.options = newVal.options
       }
@@ -42,7 +46,7 @@ export default {
 
     options (newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.$emit('input', { options: newVal })
+        this.$emit('update:modelValue', { options: newVal })
       }
     }
   },
@@ -50,16 +54,14 @@ export default {
   computed: {
     hasError () {
       let key = 'meta.options'
-      let errors = get(this.$page, 'props.errors')
 
-      return (typeof errors[key] !== 'undefined')
+      return (typeof this.errors[key] !== 'undefined')
     },
 
     errorsList () {
       let key = 'meta.options'
-      let errors = get(this.$page, 'props.errors')
 
-      return (typeof errors[key] !== 'undefined' ? errors[key] : [])
+      return (typeof this.errors[key] !== 'undefined' ? this.errors[key].messages : [])
     }
   },
 
@@ -70,8 +72,8 @@ export default {
   },
 
   mounted () {
-    if (get(this.value, 'options', null)) {
-      this.options = this.value.options
+    if (get(this.modelValue, 'options', null)) {
+      this.options = this.modelValue.options
     }
   }
 }
